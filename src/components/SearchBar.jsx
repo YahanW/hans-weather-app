@@ -1,12 +1,11 @@
 
 import {React, useEffect, useState } from 'react'
-import { Input, Button } from 'antd';
+import { Input } from 'antd';
 import useSWR from "swr";
-import { Link, useNavigate, redirect } from "react-router-dom";
-import Dashboard from '../page/Dashboard';
+import { useNavigate} from "react-router-dom";
 
-const key = '2d132eec13fd43018af03710230307';
-const fetcher = (url) => fetch(url).then((res) => res.json());
+
+export const ApiFetcher = (url) => fetch(url).then((res) => res.json());
 
 
 const SearchBar = () => {
@@ -16,7 +15,7 @@ const SearchBar = () => {
 
   const { data, error, isLoading } = useSWR(
     "http://ip-api.com/json/",
-    fetcher
+    ApiFetcher
   );
   if (error) return "An error has occurred.";
   if (isLoading) return "Loading...";

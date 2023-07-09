@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Logo from '../components/Logo'
-import { Input, Button, Table } from 'antd';
+import { Tabs } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { Divider } from 'antd';
 import SearchBar from '../components/SearchBar';
@@ -12,8 +12,6 @@ import Forecast from './Forecast';
 
 export const LocationContext = createContext(null);
 
-const key = '2d132eec13fd43018af03710230307';
-const fetcher = (url) => fetch(url).then((res) => res.json());
 
 /* To GET string location (s) from URL */
 function useQuery() {
@@ -22,13 +20,30 @@ function useQuery() {
     return React.useMemo(() => new URLSearchParams(search), [search]);
 }
 
+const onChange = (key) => {
+  console.log(key);
+};
+const items = [
+  {
+    key: '1',
+    label: `Current`,
+    children: <Current/>,
+  },
+  {
+    key: '2',
+    label: `Forecast`,
+    children: <Forecast/>,
+  },
+];
+
 const Dashboard = () => {
 
-  const [location, setLocation] = useState('');
+  // const [isCurrent, setIsCurrent] = useState('')
+
   const q = useQuery();
-  setLocation(q.get('s'));
+  const location = q.get('s');
   
-  // console.log('q',q.get('s'));
+  console.log('q',location);
   // setLocation(q.get('s'));
 
   //   const {data, error, isLoading } = useSWR(
@@ -52,8 +67,6 @@ const Dashboard = () => {
   //   return <table>{listItems}</table>;
   // };
 
-
-
   return (
     <div name="dashboard" className='w-full h-screen flex flex-col justify-start items-center bg-gray-100'>
       <LocationContext.Provider value={location}>
@@ -68,23 +81,16 @@ const Dashboard = () => {
       {/* separates the two parts  */}
       <div name='divider' className='w-full flex felx-col justify-center items-end'>
           <Divider />
-          {/* <ul>
-              <Link to={Current} className=' duration-300'>
-                <li>
-                  Current
-                </li>
-              </Link>
-              <Link to={Forecast} className='duration-300'>
-                <li>
-                  Forecast
-                </li>
-            </Link>
-          </ul> */}
+          
       </div>
+      
+      
       {/* bottom part contains 3 panels displaying "Today" "Hourly" and "3-days" */}
+      <div className='w-full ps-14'>
 
-          {/* <Current />
-          <Forecast /> */}
+          <Tabs defaultActiveKey="1" items={items} onChange={onChange}/>
+      </div>
+
 
       </LocationContext.Provider>
     </div>
