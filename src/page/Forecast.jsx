@@ -16,32 +16,57 @@ const Forecast = () => {
   );
   if (error) return "error";
   if (isLoading) return "Loading...";
-  console.log("forecast", data.forecast.forecastday);
+  console.log("forecast", data);
 
 
-  delete data.forecast.forecastday[0].day.condition;
-  delete data.forecast.forecastday[1].day.condition;
-  delete data.forecast.forecastday[2].day.condition;
+  // delete data.forecast.forecastday[0].day.condition;
+  // delete data.forecast.forecastday[1].day.condition;
+  // delete data.forecast.forecastday[2].day.condition;
+  const threeDayWeather = [
+    {
+      day: data.forecast.forecastday[0].date,
+      text: data.forecast.forecastday[0].day.condition.text,
+      icon: data.forecast.forecastday[0].day.condition.icon,
+      min_temp: data.forecast.forecastday[0].day.mintemp_c,
+      max_temp: data.forecast.forecastday[0].day.maxtemp_c,
 
+    },
+    {
+      day: data.forecast.forecastday[1].date,
+      text: data.forecast.forecastday[1].day.condition.text,
+      icon: data.forecast.forecastday[1].day.condition.icon,
+      min_temp: data.forecast.forecastday[1].day.mintemp_c,
+      max_temp: data.forecast.forecastday[1].day.maxtemp_c,
 
-  const dataItemToKeyValues = (item) => {
-    const entries = Object.entries(item);
-    const listItems = entries.map(([key, value]) => (
-      <tr><th>{key}</th>
-        <td>{value}</td></tr>
-    ));
-    return <table>{listItems}</table>;
-  };
+    },
+    {
+      day: data.forecast.forecastday[2].date,
+      text: data.forecast.forecastday[2].day.condition.text,
+      icon: data.forecast.forecastday[2].day.condition.icon,
+      min_temp: data.forecast.forecastday[2].day.mintemp_c,
+      max_temp: data.forecast.forecastday[2].day.maxtemp_c,
+
+    },
+
+  ]
+
 
 
   return (
-    <div name='bottom-left' className='flex flex-row justify-around m-5 w-[inherit] bg-gray-400' >
+    <div name='bottom-left' className='flex flex-row justify-around m-5 w-[inherit] ' >
 
-      <div>{dataItemToKeyValues(data.forecast.forecastday[0].day)}</div>
-      <div>{dataItemToKeyValues(data.forecast.forecastday[1].day)}</div>
-      <div>{dataItemToKeyValues(data.forecast.forecastday[2].day)}</div>
+      {
+        threeDayWeather.map((item) =>
+          <div className='flex flex-col justify-center items-center text-xl'>
+            <p>{item.day}</p>
+            <img src={item.icon} className=' w-40 h-40' />
+            <p>{item.text}</p>
+            <p>Min Temperature: {item.min_temp}C</p>
+            <p>Max Temperature: {item.max_temp}C</p>
+          </div>
 
-
+        )
+      }
     </div>
   )
 }

@@ -1,0 +1,8 @@
+.ant-tabs-nav-wrap {
+    display: flex;
+    justify-content: center;
+    font-size: large;
+}
+.ant-tabs-tab .ant-tabs-tab-btn {
+    font-size: x-large;
+}

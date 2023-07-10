@@ -9,6 +9,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { createContext, useContext, useState } from 'react';
 import Current from './Current';
 import Forecast from './Forecast';
+import './Dashboard.css'
 
 export const LocationContext = createContext(null);
 
@@ -31,7 +32,7 @@ const items = [
   },
   {
     key: '2',
-    label: `Forecast`,
+    label: `3-day Forecast`,
     children: <Forecast/>,
   },
 ];

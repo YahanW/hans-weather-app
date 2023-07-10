@@ -20,25 +20,30 @@ const Current = () => {
   if (isLoading) return "Loading...";
   console.log("curent", data);
 
-  delete data.current.condition;
+  // delete data.current.condition;
 
 
-  const dataItemToKeyValues = (item) => {
-    const entries = Object.entries(item);
-    const listItems = entries.map(([key, value]) => (
-      <tr><th>{key}</th>
-        <td>{value}</td></tr>
-    ));
-    return <table>{listItems}</table>;
-  };
+  const curWeather = [
+    {
+      text: data.current.condition.text,
+      icon: data.current.condition.icon,
+      temp: data.current.temp_c,
+    }
+  ]
 
 
   return (
-    <div name='bottom-left' className='flex justify-center items-center m-5 w-[inherit] bg-gray-400'>
+    <div name='bottom-left' className='flex justify-center items-center m-5 w-[inherit]'>
 
         {
-
-          dataItemToKeyValues(data.current)
+          curWeather.map((item)=>
+            <div className='flex flex-col justify-center items-center text-xl'>
+            <img src={item.icon} className=' w-40 h-40'/>
+              <p>{item.text}</p> 
+              <p>Temperature Now is {item.temp}C</p>
+              </div>
+            
+              )
         }
 
 
