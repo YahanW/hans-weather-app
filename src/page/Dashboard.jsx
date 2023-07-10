@@ -44,7 +44,7 @@ const Dashboard = () => {
   const q = useQuery();
   const location = q.get('s');
   
-  console.log('q',location);
+  // console.log('q',location);
   // setLocation(q.get('s'));
 
   //   const {data, error, isLoading } = useSWR(
