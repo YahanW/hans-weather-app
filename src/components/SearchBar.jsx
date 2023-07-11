@@ -37,7 +37,7 @@ const SearchBar = () => {
       <Input.Search style={{ width: '18rem', maxWidth: '500px', height: '1rem' }} allowClear
               placeholder="Search City Name" onSearch={onSearch}/>
 
-           <a className='pt-4'>Current IP location is {ipLocation}</a>  
+           {/* <a className='pt-4'>Current IP location is {ipLocation}</a>   */}
 
     </div>
   )
