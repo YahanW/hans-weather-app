@@ -5,7 +5,7 @@ import useSWR from "swr";
 import { useNavigate} from "react-router-dom";
 
 
-export const ApiFetcher = (url) => fetch(url).then((res) => res.json());
+
 
 
 const SearchBar = () => {
@@ -13,14 +13,14 @@ const SearchBar = () => {
   // const [location, setLocation] = useState('');
   const navigate = useNavigate();
 
-  const { data, error, isLoading } = useSWR(
-    "http://ip-api.com/json/",
-    ApiFetcher
-  );
-  if (error) return "An error has occurred.";
-  if (isLoading) return "Loading...";
+  // const { data, error, isLoading } = useSWR(
+  //   "http://ip-api.com/json/",
+  //   ApiFetcher
+  // );
+  // if (error) return "An error has occurred.";
+  // if (isLoading) return "Loading...";
 
-  const ipLocation = data.city;
+  // const ipLocation = data.city;
 
   const onSearch = (s) => {
     // setLocation(value);

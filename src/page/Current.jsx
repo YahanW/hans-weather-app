@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react'
 import useSWR from "swr";
 import { LocationContext } from './Dashboard';
-import { ApiFetcher } from '../components/SearchBar';
 
 
 export const ApiKey = '2d132eec13fd43018af03710230307';
+export const ApiFetcher = (url) => fetch(url).then((res) => res.json());
 
 const Current = () => {
   const location = useContext(LocationContext);

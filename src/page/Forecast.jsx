@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import useSWR from "swr";
 import { LocationContext } from './Dashboard';
-import { ApiFetcher } from '../components/SearchBar';
+import { ApiFetcher } from '../page/Current.jsx';
 import { ApiKey } from './Current';
 
 const Forecast = () => {
