@@ -3,6 +3,7 @@ import useSWR from "swr";
 import { LocationContext } from './Dashboard';
 import { ApiFetcher } from '../page/Current.jsx';
 import { ApiKey } from './Current';
+import { Divider } from 'antd';
 
 const Forecast = () => {
   const location = useContext(LocationContext);
@@ -53,7 +54,7 @@ const Forecast = () => {
 
 
   return (
-    <div name='bottom-left' className='flex flex-row justify-around m-5 w-[inherit] ' >
+    <div name='bottom-left' className='flex flex-row justify-around m-5 w-[inherit] max-sm:flex-col max-sm:justify-start' >
 
       {
         threeDayWeather.map((item) =>
@@ -63,6 +64,7 @@ const Forecast = () => {
             <p>{item.text}</p>
             <p>Min Temperature: {item.min_temp}C</p>
             <p>Max Temperature: {item.max_temp}C</p>
+            <Divider/>
           </div>
 
         )

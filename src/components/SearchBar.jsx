@@ -1,8 +1,9 @@
 
 import {React, useEffect, useState } from 'react'
-import { Input } from 'antd';
+import { Input, AutoComplete, Button } from 'antd';
 import useSWR from "swr";
 import { useNavigate} from "react-router-dom";
+import { ApiFetcher, ApiKey } from '../page/Current';
 
 
 
@@ -10,32 +11,45 @@ import { useNavigate} from "react-router-dom";
 
 const SearchBar = () => {
 
-  // const [location, setLocation] = useState('');
-  const navigate = useNavigate();
+const navigate = useNavigate();
 
-  // const { data, error, isLoading } = useSWR(
-  //   "http://ip-api.com/json/",
-  //   ApiFetcher
-  // );
-  // if (error) return "An error has occurred.";
-  // if (isLoading) return "Loading...";
 
-  // const ipLocation = data.city;
 
-  const onSearch = (s) => {
+  async function onSearch(searchText) {
+    if (searchText === '') {
+      return '';
+    } else {
+      const res = await fetch("http://api.weatherapi.com/v1/search.json?key=" + ApiKey + "&q=" + searchText)
+      const data = await res.json()  //.then((response) => response.json()).then((data) => {
+      // setOptions(data[0].name);
+          if (data.length > 0) {
+            console.log(data);
+
+            //setOptions(data[0].name + ", " + data[0].region);
+            navigate(`/dashboard?s=${searchText}`);
+          }
+          else {
+            alert("No such city")
+            console.log("no such city");
+          }
+        };
+    console.log(searchText);
+    }
     // setLocation(value);
-    console.log(s);
-    navigate(`/dashboard?s=${s}`);
-  }
+    
+    
+  
 
   // console.log('location', location);
 
   return (
     
     <div className='flex flex-col justify-end items-center mb-0'>
-      
-      <Input.Search style={{ width: '18rem', maxWidth: '500px', height: '1rem' }} allowClear
-              placeholder="Search City Name" onSearch={onSearch}/>
+
+      <Input.Search
+      style={{ width: '18rem', maxWidth: '500px', height: '1rem' }} 
+        placeholder="Search City Name"
+        onSearch={onSearch}/>
 
            {/* <a className='pt-4'>Current IP location is {ipLocation}</a>   */}
 

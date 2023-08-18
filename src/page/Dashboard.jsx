@@ -75,7 +75,7 @@ const Dashboard = () => {
         {/* header part */}
       <div name='header' className='w-[95%] h-20 flex flex-row justify-between items-center ml-[5%]'>
         <Logo height={'h-16'} textSize={'text-sm'}/>
-        <h1 className='text-2xl'>Showing Weather for {location}</h1>
+        <h1 className='text-2xl max-sm:hidden'>Showing Weather for {location}</h1>
         <SearchBar/>
               
       </div>
